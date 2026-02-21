@@ -1,6 +1,8 @@
 {% extends "layout/basic.html" %}
 {% block content %}
-{% if _rawError._theme == 'xibao' %}
+{% if _rawError._theme == 'xibao_bgm' %}
+{% include "error_xibao_bgm.html" %}
+{% elif _rawError._theme == 'xibao' %}
 {% include "error_xibao.html" %}
 {% else %}
 {% include "error_cloudflare.html" %}
