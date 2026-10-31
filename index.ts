@@ -3,7 +3,7 @@ import { Context, Schema } from 'hydrooj';
 export const name = 'errorpage-theme';
 export const Config = Schema.intersect([
     Schema.object({
-        theme: Schema.union(['xibao_bgm', 'xibao', 'cloudflare']).default('cloudflare'),
+        theme: Schema.union(['xibao_bgm', 'xibao', 'cloudflare', 'bsod_win10', 'bsod_win11']).default('cloudflare'),
     }),
     Schema.union([
         Schema.object({
@@ -17,6 +17,12 @@ export const Config = Schema.intersect([
             by: Schema.string().default('Cloudflare'),
             url: Schema.string().role('url').default('https://www.cloudflare.com'),
             location: Schema.string().default('San Francisco'),
+        }),
+        Schema.object({
+            theme: Schema.const('bsod_win10'),
+        }),
+        Schema.object({
+            theme: Schema.const('bsod_win11'),
         }),
     ] as const),
 ]);

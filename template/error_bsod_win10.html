@@ -1,0 +1,219 @@
+<style>
+  .main {
+    padding: 0 !important;
+  }
+
+  body {
+    overflow: hidden !important;
+  }
+
+  .hydro-bsod-win10 {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: clamp(72px, 10vh, 120px) clamp(20px, 8vw, 140px) clamp(24px, 4vh, 48px);
+    background: #0078d7;
+    color: #fff;
+    font-family: "Segoe UI", "Segoe UI Variable Text", "Microsoft YaHei UI", "Microsoft YaHei",
+      "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .hydro-bsod-win10 * {
+    box-sizing: border-box;
+  }
+
+  .hydro-bsod-win10__body {
+    flex: 1;
+    min-height: min-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hydro-bsod-win10__face {
+    margin: 0 0 0.2em;
+    font-size: clamp(96px, 14vw, 180px);
+    font-weight: 200;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .hydro-bsod-win10__headline,
+  .hydro-bsod-win10__progress {
+    max-width: 900px;
+    margin: 0;
+    font-size: clamp(20px, 2.8vw, 36px);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  .hydro-bsod-win10__progress {
+    margin-top: 1.5rem;
+  }
+
+  .hydro-bsod-win10__qrrow {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .hydro-bsod-win10__qr {
+    flex: none;
+    display: block;
+    width: clamp(96px, 11vw, 150px);
+    height: clamp(96px, 11vw, 150px);
+    background: #fff;
+  }
+
+  .hydro-bsod-win10__qr img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hydro-bsod-win10__infos {
+    min-width: 0;
+    font-size: clamp(12px, 1.15vw, 16px);
+    line-height: 1.7;
+  }
+
+  .hydro-bsod-win10__infos p {
+    margin: 0;
+  }
+
+  .hydro-bsod-win10__info-main a {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+  }
+
+  .hydro-bsod-win10__support {
+    margin-top: 1.4em !important;
+  }
+
+  .hydro-bsod-win10__code,
+  .hydro-bsod-win10__detail,
+  .hydro-bsod-win10__tech {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .hydro-bsod-win10__swap {
+    cursor: help;
+  }
+
+  .hydro-bsod-win10__swap:focus {
+    outline: none;
+  }
+
+  .hydro-bsod-win10__tech {
+    display: none;
+    opacity: 0.85;
+  }
+
+  .hydro-bsod-win10__swap:hover .hydro-bsod-win10__detail,
+  .hydro-bsod-win10__swap:focus .hydro-bsod-win10__detail {
+    display: none;
+  }
+
+  .hydro-bsod-win10__swap:hover .hydro-bsod-win10__tech,
+  .hydro-bsod-win10__swap:focus .hydro-bsod-win10__tech {
+    display: block;
+  }
+
+  .hydro-bsod-win10__foot {
+    display: flex;
+    gap: 1.6em;
+    padding-top: 1.5rem;
+    font-size: clamp(11px, 1vw, 14px);
+    opacity: 0.8;
+  }
+
+  .hydro-bsod-win10 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .hydro-bsod-win10__foot a {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .hydro-bsod-win10__foot a:hover {
+    border-color: #fff;
+  }
+
+  @media (max-width: 720px) {
+    .hydro-bsod-win10 {
+      padding: 72px 6vw 4vh;
+    }
+
+    .hydro-bsod-win10__headline,
+    .hydro-bsod-win10__progress {
+      font-size: clamp(19px, 5.5vw, 30px);
+    }
+
+    .hydro-bsod-win10__qrrow {
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+  }
+</style>
+
+<div class="hydro-bsod-win10" role="main" aria-label="Windows 10 蓝屏">
+  <div class="hydro-bsod-win10__body">
+  <div class="hydro-bsod-win10__face" aria-hidden="true">:(</div>
+  <p class="hydro-bsod-win10__headline">你的操作遇到问题，需要反省。我们不收集某些错误信息，然后为你假装重启。</p>
+  <p class="hydro-bsod-win10__progress" id="hydro-bsod-win10-progress">0% 完成</p>
+  <div class="hydro-bsod-win10__qrrow">
+    <a class="hydro-bsod-win10__qr" href="https://www.windows.com/stopcode" target="_blank" rel="noopener noreferrer"
+      aria-label="有关此问题的详细信息和可能的解决方法">
+      <img src="/stopcode.svg" alt="">
+    </a>
+    <div class="hydro-bsod-win10__infos">
+      <p class="hydro-bsod-win10__info-main">有关此问题的详细信息和可能的解决方法，请访问
+        <a href="https://www.windows.com/stopcode" target="_blank" rel="noopener noreferrer">https://www.windows.com/stopcode</a>
+      </p>
+      <p class="hydro-bsod-win10__support">如果致电支持人员，请向他们提供以下信息：</p>
+      <p class="hydro-bsod-win10__code">停止代码: <span id="hydro-bsod-win10-stopcode">{{ error.name }}</span>{% if error.code %} ({{ error.code }}){% endif %}</p>
+      <div class="hydro-bsod-win10__swap" tabindex="0">
+        <p class="hydro-bsod-win10__detail">你的问题: {{ _(error.message).formatFromArray(error.params) }}</p>
+        <p class="hydro-bsod-win10__tech">技术信息: {% if error.params and error.params.length %}{% for param in error.params %}{% if instanceof(param, UserFacingError) %}{{ _(param.message).formatFromArray(param.params) }}{% else %}{{ param }}{% endif %}{% if not loop.last %} · {% endif %}{% endfor %}{% else %}无更多信息{% endif %}</p>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="hydro-bsod-win10__foot">
+    <a href="/">重新尝试</a>
+    <a href="#" id="hydro-bsod-win10-back">返回上一步</a>
+  </div>
+</div>
+<script>
+  (function () {
+    var progress = document.getElementById('hydro-bsod-win10-progress');
+    if (progress) {
+      var value = 0;
+      (function tick() {
+        if (value >= 99) return;
+        value = Math.min(99, value + 1 + Math.random() * 2);
+        progress.textContent = Math.floor(value) + '% 完成';
+        setTimeout(tick, 350 + Math.random() * 550);
+      })();
+    }
+    var stopcode = document.getElementById('hydro-bsod-win10-stopcode');
+    if (stopcode) {
+      stopcode.textContent = stopcode.textContent.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toUpperCase();
+    }
+    var back = document.getElementById('hydro-bsod-win10-back');
+    if (back) {
+      back.addEventListener('click', function (e) {
+        e.preventDefault();
+        history.back();
+      });
+    }
+  })();
+</script>

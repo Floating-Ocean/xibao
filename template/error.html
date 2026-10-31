@@ -4,6 +4,10 @@
 {% include "error_xibao_bgm.html" %}
 {% elif _rawError._theme == 'xibao' %}
 {% include "error_xibao.html" %}
+{% elif _rawError._theme == 'bsod_win10' %}
+{% include "error_bsod_win10.html" %}
+{% elif _rawError._theme == 'bsod_win11' %}
+{% include "error_bsod_win11.html" %}
 {% else %}
 {% include "error_cloudflare.html" %}
 {% endif %}

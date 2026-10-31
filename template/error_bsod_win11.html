@@ -1,0 +1,164 @@
+<style>
+  .main {
+    padding: 0 !important;
+  }
+
+  body {
+    overflow: hidden !important;
+  }
+
+  .hydro-bsod-win11 {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 0 clamp(20px, 7vw, 120px);
+    background: #000;
+    color: #fff;
+    font-family: "Segoe UI", "Segoe UI Variable Text", "Microsoft YaHei UI", "Microsoft YaHei",
+      "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .hydro-bsod-win11 * {
+    box-sizing: border-box;
+  }
+
+  .hydro-bsod-win11__title,
+  .hydro-bsod-win11__progress {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: clamp(20px, 2.8vw, 38px);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  .hydro-bsod-win11__title {
+    margin-top: 45.7vh;
+  }
+
+  .hydro-bsod-win11__progress {
+    margin-top: 3.1vh;
+  }
+
+  .hydro-bsod-win11__bottom {
+    margin-top: auto;
+    padding: 6vh 0 3.5vh;
+    text-align: center;
+    font-size: clamp(12px, 1.15vw, 17px);
+    line-height: 1.7;
+    cursor: help;
+  }
+
+  .hydro-bsod-win11__bottom:focus {
+    outline: none;
+  }
+
+  .hydro-bsod-win11__bottom p {
+    margin: 0;
+  }
+
+  .hydro-bsod-win11__tech {
+    display: none;
+    opacity: 0.85;
+  }
+
+  .hydro-bsod-win11__bottom:hover .hydro-bsod-win11__detail,
+  .hydro-bsod-win11__bottom:focus .hydro-bsod-win11__detail {
+    display: none;
+  }
+
+  .hydro-bsod-win11__bottom:hover .hydro-bsod-win11__tech,
+  .hydro-bsod-win11__bottom:focus .hydro-bsod-win11__tech {
+    display: block;
+  }
+
+  .hydro-bsod-win11__foot a {
+    position: absolute;
+    bottom: clamp(10px, 1.8vh, 24px);
+    font-size: clamp(11px, 1vw, 14px);
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .hydro-bsod-win11__foot a:first-child {
+    left: clamp(12px, 2vw, 28px);
+  }
+
+  .hydro-bsod-win11__foot a:last-child {
+    right: clamp(12px, 2vw, 28px);
+  }
+
+  .hydro-bsod-win11 a:hover {
+    color: #fff;
+    border-color: #fff;
+  }
+
+  @media (max-width: 720px) {
+    .hydro-bsod-win11__title {
+      margin-top: 30vh;
+      font-size: clamp(19px, 5.5vw, 30px);
+    }
+
+    .hydro-bsod-win11__progress {
+      margin-top: 3.2vh;
+      font-size: clamp(19px, 5.5vw, 30px);
+    }
+
+    .hydro-bsod-win11__bottom {
+      padding-bottom: 6vh;
+      font-size: 12px;
+    }
+  }
+</style>
+
+<div class="hydro-bsod-win11" role="main" aria-label="Windows 11 黑屏死机">
+  <p class="hydro-bsod-win11__title">你的操作遇到问题，需要反省。</p>
+  <p class="hydro-bsod-win11__progress" id="hydro-bsod-win11-progress">0% 完成</p>
+  <div class="hydro-bsod-win11__bottom" tabindex="0">
+    <p class="hydro-bsod-win11__detail">你的问题: {{ _(error.message).formatFromArray(error.params) }}</p>
+    <p class="hydro-bsod-win11__tech">技术信息: {% if error.params and error.params.length %}{% for param in error.params %}{% if instanceof(param, UserFacingError) %}{{ _(param.message).formatFromArray(param.params) }}{% else %}{{ param }}{% endif %}{% if not loop.last %} · {% endif %}{% endfor %}{% else %}无更多信息{% endif %}</p>
+    <p>终止代码: <span id="hydro-bsod-win11-stopcode">{{ error.name }}</span>{% if error.code %} (<span id="hydro-bsod-win11-code">{{ error.code }}</span>){% endif %}</p>
+  </div>
+  <div class="hydro-bsod-win11__foot">
+    <a href="#" id="hydro-bsod-win11-back">返回上一步</a>
+    <a href="/">重新尝试</a>
+  </div>
+</div>
+<script>
+  (function () {
+    var progress = document.getElementById('hydro-bsod-win11-progress');
+    if (progress) {
+      var value = 0;
+      (function tick() {
+        if (value >= 99) return;
+        value = Math.min(99, value + 1 + Math.random() * 2);
+        progress.textContent = Math.floor(value) + '% 完成';
+        setTimeout(tick, 350 + Math.random() * 550);
+      })();
+    }
+    var stopcode = document.getElementById('hydro-bsod-win11-stopcode');
+    if (stopcode) {
+      stopcode.textContent = stopcode.textContent.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toUpperCase();
+    }
+    var code = document.getElementById('hydro-bsod-win11-code');
+    if (code) {
+      var n = parseInt(code.textContent, 10);
+      if (!isNaN(n)) code.textContent = '0x' + n.toString(16).toUpperCase();
+    }
+    var back = document.getElementById('hydro-bsod-win11-back');
+    if (back) {
+      back.addEventListener('click', function (e) {
+        e.preventDefault();
+        history.back();
+      });
+    }
+  })();
+</script>
